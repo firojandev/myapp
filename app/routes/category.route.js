@@ -1,9 +1,9 @@
+const { findAllCategory, createCategory } = require("../controllers/category.controller");
 
 const categoryRoute = (app) => {
 
-    app.get('/category', (req, res) => {
-        res.json({ message: 'Get category done' });
-    });
+    app.get('/category', findAllCategory);
+    app.post('/category', createCategory);
 
 }
 
