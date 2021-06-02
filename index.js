@@ -1,5 +1,6 @@
 const express = require('express');
 const customerRoute = require('./app/routes/customer.route');
+const categoryRoute = require('./app/routes/category.route');
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.get('/',(req, res) => {
 });
 
 customerRoute(app);
+categoryRoute(app);
 
 app.listen(3000,() => {
     console.log('Listening the port 3000');
