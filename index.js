@@ -1,22 +1,16 @@
-var express = require('express')
+const express = require('express');
+const customerRoute = require('./app/routes/customer.route');
 
-const handle = require('./src/handle');
+const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-var app = express()
-
-const router = express.Router();
-
-app.use(router);
-
-app.locals.title = "My App";
-
-app.get('/',handle);
-
-app.post('/',(req,res) => {
-    console.log(req.body);
-    res.send('Hello Mrs:'+req.body.title);
+app.get('/',(req, res) => {
+    res.json({message:"Welcome to express js"});
 });
+
+customerRoute(app);
 
 app.listen(3000,() => {
     console.log('Listening the port 3000');
