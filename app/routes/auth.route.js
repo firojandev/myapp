@@ -1,8 +1,9 @@
-const { signup } = require('../controllers/auth.controller');
+const { signup, me } = require('../controllers/auth.controller');
 
 const authRoute = (app) => {
 
     app.post('/auth/signup',signup);
+    app.get('/auth/me',me);
 
 }
 

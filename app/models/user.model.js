@@ -17,4 +17,18 @@ User.create = (newUser, result) => {
     });
 };
 
+User.findById = (id, result) => {
+    connection.query(`SELECT id, email, name, status FROM users WHERE id = ${id}`, (err, res) => {
+        if (err) {
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            result(null, res[0]);
+            return;
+        }
+        result({ kind: "not_found" }, null);
+    });
+};
+
 module.exports = User;
