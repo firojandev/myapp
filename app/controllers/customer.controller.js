@@ -9,6 +9,7 @@ exports.createCustomer = (req, res) => {
                 message: "Empt body request err!"
             }
         );
+        return;
     }
 
     const customer = new Customer({
@@ -27,3 +28,15 @@ exports.createCustomer = (req, res) => {
     });
 
 };
+
+exports.findAllCustomers = (req, res) => {
+    Customer.getAll((err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving customers."
+            });
+        else res.send(data);
+    });
+};
+
