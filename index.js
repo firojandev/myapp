@@ -1,15 +1,17 @@
 var express = require('express')
-var app = express()
 
-app.use(express.json());
+const handle = require('./src/handle');
+
+
+var app = express()
 
 const router = express.Router();
 
 app.use(router);
 
-app.get('/',(req,res) => {
-    res.send('call successfully:'+req.method);
-});
+app.locals.title = "My App";
+
+app.get('/',handle);
 
 app.post('/',(req,res) => {
     console.log(req.body);
