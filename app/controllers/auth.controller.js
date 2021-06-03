@@ -42,10 +42,33 @@ exports.me = (req, res) => {
 
     jwt.verify(token, config.secret, function (err, decoded) {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-       User.findById(decoded.id, function (err, user) {
-        if (err) return res.status(500).send("There was a problem finding the user.");
-        if (!user) return res.status(404).send("No user found.");
-        res.status(200).send(user);
-      });
+        User.findById(decoded.id, function (err, user) {
+            if (err) return res.status(500).send({ message: "There was a problem finding the user." });
+            if (!user) return res.status(404).send({ message: "No user found." });
+            res.status(200).send(user);
+        });
     });
 };
+
+exports.login = (req, res) => {
+    User.findByEmail(req.body.email, function (err, user) {
+        if (!user)
+            return res.status(404).json({ auth: false, message: "No user found." });
+
+        // res.status(200).send(user);
+
+        var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+
+        if (!passwordIsValid) return res.status(401).send({ auth: false, message: 'Wrong credentials', token: null });
+
+        var token = jwt.sign({ id: user.id }, config.secret, {
+            expiresIn: 86400 // expires in 24 hours
+        });
+        res.status(200).send({ auth: true, token: token });
+
+    });
+};
+
+exports.logout = (req, res) => {
+    res.status(200).send({ auth: false, token: null });
+}

@@ -31,4 +31,19 @@ User.findById = (id, result) => {
     });
 };
 
+User.findByEmail = (email, result) => {
+    connection.query(`SELECT id, email, password, name, status FROM users WHERE email = '${email}' AND status = 1 `, (err, res) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            result(null, res[0]);
+            return;
+        }
+        result({ kind: "not_found" }, null);
+    });
+};
+
 module.exports = User;
