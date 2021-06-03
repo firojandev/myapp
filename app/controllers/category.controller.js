@@ -1,6 +1,6 @@
 const Category = require('../models/category.model');
 
-exports.findAllCategory = (req, res) => {
+exports.findAllCategory = (req, res, next) => {
     Category.getAll((err, data) => {
         if (err)
             res.status(500).send({
