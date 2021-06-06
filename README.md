@@ -5,6 +5,7 @@ What is included
 - JWT integrated
 - Middleware integrated
 - Create, Read, Update & Delete operation with mysql database
+- Sequelize ORM
 - User signup & login
 - Express separated routing
 - Secured this RESTful APIs with middleware
