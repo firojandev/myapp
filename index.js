@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
     res.json({ message: "Welcome to express js" });
 });
 
+//All routes
 authRoute(app);
 customerRoute(app);
 categoryRoute(app);
