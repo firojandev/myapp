@@ -4,8 +4,8 @@ const dbconfig = require('../config/db.config');
 const connection = mysql.createConnection({
     host:dbconfig.HOST,
     database:dbconfig.DB,
-    user:dbconfig.user,
-    password:dbconfig.password
+    user:dbconfig.USER,
+    password:dbconfig.PASSWORD
 });
 
 connection.connect(err => {

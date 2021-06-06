@@ -1,5 +1,5 @@
 const config = {
-    'port':3001,
+    'port':3000,
     'secret': 'supersecret'
 }
 
